@@ -1,0 +1,362 @@
+{
+  "active": false,
+  "connections": {
+    "On clicking 'execute'": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "n8n": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        []
+      ]
+    },
+    "Gmail2": {
+      "main": [
+        []
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "n8n",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram2": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-31T18:48:28.857Z",
+  "id": "4BBoO5mKn29ZVFt7",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Main workflow loop backup",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a21192da-a25c-4c76-acd8-0a744839c341",
+      "name": "On clicking 'execute'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "position": [
+        1640,
+        580
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      },
+      "id": "47569a5b-56c8-458c-b69e-e35898078778",
+      "name": "n8n",
+      "type": "n8n-nodes-base.n8n",
+      "position": [
+        2040,
+        680
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "n8nApi": {
+          "id": "8ThPumwZs2psTgyn",
+          "name": "n8n account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "2f83fa7c-3be9-4803-97f6-b7c2169bfd9a",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "position": [
+        2240,
+        680
+      ],
+      "typeVersion": 3
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 1,
+              "triggerAtMinute": 33
+            }
+          ]
+        }
+      },
+      "id": "4f1c1cee-07ec-4d95-bd3e-cb370367d528",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [
+        1620,
+        800
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {
+        "content": "## Main workflow loop",
+        "height": 416.1856906618075,
+        "width": 1272.6408145680155,
+        "color": 7
+      },
+      "id": "e3f40902-7eab-4d7f-917e-bebd8f0dd233",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1620,
+        500
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "workflowId": "=rkExj7m8P27lT2xs",
+        "options": {}
+      },
+      "id": "275ece6c-3675-49b4-a238-f82ca49078b7",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "position": [
+        2460,
+        720
+      ],
+      "typeVersion": 1,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "misapr3@gmail.com",
+        "subject": "=Backup Started {{ $execution.id }}",
+        "emailType": "text",
+        "message": "=:information_source:  Starting Workflow Backup [{{ $execution.id }}]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1860,
+        220
+      ],
+      "id": "6814ca46-f3ba-4118-8369-41dc5db15441",
+      "name": "Gmail",
+      "webhookId": "d132a08f-40b9-4d9e-bdfa-ec2f348f91e6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "giXAyBbmjO0ejxdg",
+          "name": "Gmail account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sendTo": "misapr3@gmail.com",
+        "subject": "=Backup Started {{ $execution.id }}",
+        "emailType": "text",
+        "message": "=✅ Backup has completed - {{ $('n8n').all().length }} workflows have been processed.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2460,
+        360
+      ],
+      "id": "184800bb-c127-46c5-87a4-782de0c683fd",
+      "name": "Gmail1",
+      "webhookId": "d132a08f-40b9-4d9e-bdfa-ec2f348f91e6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "giXAyBbmjO0ejxdg",
+          "name": "Gmail account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "sendTo": "misapr3@gmail.com",
+        "subject": "=Backup Started {{ $execution.id }}",
+        "emailType": "text",
+        "message": "=:x: Failed to backup {{ $('Loop Over Items').item.json.id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2660,
+        1020
+      ],
+      "id": "28945a34-f49d-476d-bb1c-7de5915ae935",
+      "name": "Gmail2",
+      "webhookId": "d132a08f-40b9-4d9e-bdfa-ec2f348f91e6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "giXAyBbmjO0ejxdg",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "489359810",
+        "text": "=:information_source:  Starting Workflow Backup [{{ $execution.id }}]",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1860,
+        680
+      ],
+      "id": "68ccd49f-d09e-41f1-93e4-f7f7f32645ec",
+      "name": "Telegram",
+      "webhookId": "32d75ecb-ecc5-4a04-9b23-1f61e91917b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "A1ksr9yMznqLrGdR",
+          "name": "@Mirtelebot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "489359810",
+        "text": "=Backup n8n.psyii.od.ua/workflow Done {{ $execution.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2460,
+        520
+      ],
+      "id": "9bbdc7da-142c-455b-a6a7-6ab029703679",
+      "name": "Telegram1",
+      "webhookId": "32d75ecb-ecc5-4a04-9b23-1f61e91917b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "A1ksr9yMznqLrGdR",
+          "name": "@Mirtelebot_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "489359810",
+        "text": "=:x: Failed to backup {{ $('Loop Over Items').item.json.id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2720,
+        780
+      ],
+      "id": "190a3017-6daf-47fb-bfb6-db887526fc8d",
+      "name": "Telegram2",
+      "webhookId": "32d75ecb-ecc5-4a04-9b23-1f61e91917b9",
+      "credentials": {
+        "telegramApi": {
+          "id": "A1ksr9yMznqLrGdR",
+          "name": "@Mirtelebot_bot"
+        }
+      },
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n_template",
+  "repo_owner": "Misapr-bro",
+  "repo_path  ": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T20:03:20.650Z",
+  "versionId": "7fa36fcc-7263-497f-849e-397dfa689797"
+}
