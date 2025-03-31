@@ -1,0 +1,574 @@
+{
+  "active": false,
+  "connections": {
+    "Workflow Input Trigger": {
+      "main": [
+        [
+          {
+            "node": "Set date1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "View Calendar Events": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Event": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Set date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set date": {
+      "main": [
+        [
+          {
+            "node": "Format date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format date": {
+      "main": [
+        [
+          {
+            "node": "Set Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message1": {
+      "main": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set date1": {
+      "main": [
+        [
+          {
+            "node": "Format date1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format date1": {
+      "main": [
+        [
+          {
+            "node": "Set Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message": {
+      "main": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-29T19:34:21.770Z",
+  "id": "GsTIjDyK58G1VVgC",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Calendar_Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "059c02cc-37ff-46cd-b05f-ce41e63919b2",
+      "typeVersion": 1.1,
+      "name": "Workflow Input Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -340,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 40
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        520,
+        200
+      ],
+      "id": "893f7265-edac-4a81-9c65-4b5df217bc00",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=# Role\n\nYou are a Calendar Agent\n\n# Responsibility\n\nYour role is to manage Google Calendar by viewing, creating, updating, deleting events, and checking availability.\n\n# Your Available Agents Tools\n\n- View Calendar Events  \n- Create Event  \n- Check Availability  \n- Update Event  \n- Delete Event  \n\n# Standard Operating Procedures (Example Tasks)\n\n1. **View Calendar Events**  \n   - You need to provide a **before** and **after** date.  \n   - Example: If today is **February 7, 2025**, and you are asked, *\"What events are happening today?\"*  \n     - Set **Before** to `2025-02-08 00:00:00`  \n     - Set **After** to `2025-02-07 00:00:00`  \n\n2. **Create Event**  \n   - You must provide a **start** and **end** datetime.  \n   - Before creating an event, you **MUST call the Check Availability tool** to ensure there are no scheduling conflicts.  \n\n3. **Update & Delete Event**  \n   - Both tools require an **Event ID**.  \n   - You can retrieve the Event ID using the **View Calendar Events** tool.  \n\n# Specifics\n- Current Date and Time: {{ $now }}\n- Be Detailed in your output\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        440,
+        -60
+      ],
+      "id": "e049d752-afe7-4ce6-85e1-7cf6b164d0d4",
+      "name": "Calendar Agent",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "mirmenya.pio@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mirmenya.pio@gmail.com"
+        },
+        "limit": 10,
+        "options": {
+          "timeMin": "={{ $fromAI(\"after\",\"Populate this with a relevant date based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+          "timeMax": "={{ $fromAI(\"before\",\"Populate this with a relevant date based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        680,
+        200
+      ],
+      "id": "e2294e3e-719b-4f2e-ac96-1c524ffe72fc",
+      "name": "View Calendar Events",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oJ6IQxeMRJGD0ryO",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "mirmenya.pio@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mirmenya.pio@gmail.com"
+        },
+        "start": "={{ $fromAI(\"start\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+        "end": "={{ $fromAI(\"end\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+        "additionalFields": {
+          "attendees": [],
+          "description": "={{ $fromAI(\"description\",\"Populate this with a detailed event description\",\"string\",\"\") }}",
+          "location": "={{ $fromAI(\"location\",\"Populate this with a relevant event location if provided\",\"string\",\"\") }}",
+          "summary": "={{ $fromAI(\"summary\",\"Populate this with a relevant event title\",\"string\",\"\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        820,
+        200
+      ],
+      "id": "8d408e71-a232-44e5-8e86-9ccfc2d07351",
+      "name": "Create Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oJ6IQxeMRJGD0ryO",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "calendar",
+        "calendar": {
+          "__rl": true,
+          "value": "mirmenya.pio@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mirmenya.pio@gmail.com"
+        },
+        "timeMin": "={{ $fromAI(\"start\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+        "timeMax": "={{ $fromAI(\"end\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        200
+      ],
+      "id": "5db5c9e1-1bbb-4c73-867b-18624c8ed7b6",
+      "name": "Check Availability",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oJ6IQxeMRJGD0ryO",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "calendar": {
+          "__rl": true,
+          "value": "mirmenya.pio@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mirmenya.pio@gmail.com"
+        },
+        "eventId": "={{ $fromAI(\"event_id\",\"Populate this with the event ID\",\"string\",\"\") }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        1260,
+        200
+      ],
+      "id": "e29c7402-d71c-4ffd-97cb-b7ebc880557d",
+      "name": "Delete Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oJ6IQxeMRJGD0ryO",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "text",
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        360,
+        200
+      ],
+      "id": "b9a6ae30-da6d-4141-9933-804427d62bd6",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "value": "mirmenya.pio@gmail.com",
+          "mode": "list",
+          "cachedResultName": "mirmenya.pio@gmail.com"
+        },
+        "eventId": "={{ $fromAI(\"event_id\",\"Populate this with the event ID\",\"string\",\"\") }}",
+        "updateFields": {
+          "description": "={{ $fromAI(\"description\",\"Populate this with a detailed event description\",\"string\",\"\") }}",
+          "end": "={{ $fromAI(\"end\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+          "location": "={{ $fromAI(\"location\",\"Populate this with a relevant event location if provided\",\"string\",\"\") }}",
+          "start": "={{ $fromAI(\"start\",\"Populate this with a relevant start date and time based on the conversation context. Here is the exact date format to output - 2025-02-13 10:46:49. You can leave this field blank if not relevant - in this case do not output anything\",\"string\",\"\") }}",
+          "summary": "={{ $fromAI(\"summary\",\"Populate this with a relevant event title\",\"string\",\"\") }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.2,
+      "position": [
+        1120,
+        200
+      ],
+      "id": "040848e0-119b-4367-b41a-f055bc4a23cb",
+      "name": "Update Event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "oJ6IQxeMRJGD0ryO",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "### ↑ To Do\nSelect Calendar in each node",
+        "height": 80,
+        "width": 270,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        380
+      ],
+      "id": "8afaecd2-6a11-4c44-a832-381c50267e27",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -500,
+        240
+      ],
+      "id": "696a32b9-b148-44f6-b6d6-86fd30968bbf",
+      "name": "When chat message received",
+      "webhookId": "3c4e7443-bf1d-4fd0-af8f-e7be32aa6f10"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce4da91b-1a75-4589-9da7-ca9dcd7041b6",
+              "name": "sessionId",
+              "value": "={{ $now.toFormat(\"yyyyLLdd_HHmmss\") }}",
+              "type": "string"
+            },
+            {
+              "id": "b3231910-5920-47c3-b700-13fdde6b351a",
+              "name": "query",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "178cf534-e3f0-4ca5-9e43-4e3d090bf96d",
+              "name": "chatInput ",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "8ea939a0-a9b4-4b09-a3eb-1e0c98af532f",
+              "name": "userMessage",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "dcef184b-5f36-4dec-b092-779a643c0032",
+              "name": "message",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        120,
+        200
+      ],
+      "id": "75fa2ea8-3fd4-4eb0-b565-c6c1b3d216c1",
+      "name": "Set Message1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "05a338af-66b6-4217-aa30-33e087c80b32",
+      "name": "Set date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -260,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy/H:mm",
+        "options": {}
+      },
+      "id": "690cc425-7f4a-41c8-9509-dcc2bea846c3",
+      "name": "Format date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -80,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce4da91b-1a75-4589-9da7-ca9dcd7041b6",
+              "name": "sessionId",
+              "value": "={{ $now.toFormat(\"yyyyLLdd_HHmmss\") }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        200,
+        -200
+      ],
+      "id": "23f54d0e-de7b-45c7-99da-8e390a9b38bd",
+      "name": "Set Message"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "51bc8c1c-12e5-4150-9712-a418f1f8b0d7",
+      "name": "Set date1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -140,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy/H:mm",
+        "options": {}
+      },
+      "id": "5dfb64ae-3928-48cf-8990-36051e0e93cc",
+      "name": "Format date1",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        40,
+        -200
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n_template",
+  "repo_owner": "Misapr-bro",
+  "repo_path  ": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T13:27:21.807Z",
+  "versionId": "5bb26ee4-51ec-4c00-aad5-d187e27c0d43"
+}
