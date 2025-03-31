@@ -1,0 +1,1466 @@
+{
+  "active": false,
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Set date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Productivity Supervisor": {
+      "ai_tool": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Communication Supervisor": {
+      "ai_tool": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insights Supervisor": {
+      "ai_tool": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Publishing Supervisor": {
+      "ai_tool": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lifestyle Supervisor": {
+      "ai_tool": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Set Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI2": {
+      "main": [
+        [
+          {
+            "node": "Set Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "OpenAI2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram1": {
+      "main": [
+        [
+          {
+            "node": "Get Image Info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI4": {
+      "main": [
+        [
+          {
+            "node": "Set Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Image Info": {
+      "main": [
+        [
+          {
+            "node": "OpenAI4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message": {
+      "main": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract URLs": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Telegram3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Finish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram2": {
+      "main": [
+        [
+          {
+            "node": "Extract URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram4": {
+      "main": [
+        [
+          {
+            "node": "Telegram5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram5": {
+      "main": [
+        [
+          {
+            "node": "Extract URLs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HAL 9001": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Telegram4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message1": {
+      "main": [
+        [
+          {
+            "node": "HAL 9001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set date": {
+      "main": [
+        [
+          {
+            "node": "Format date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format date": {
+      "main": [
+        [
+          {
+            "node": "Set Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-29T17:19:42.359Z",
+  "id": "SEyb1cLLNcNQTwIc",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "HAL_9001",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -2140,
+        900
+      ],
+      "id": "4703a093-56d9-4c42-bfdc-7dd6899cc901",
+      "name": "When chat message received",
+      "webhookId": "3c4e7443-bf1d-4fd0-af8f-e7be32aa6f10"
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 40
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1000,
+        700
+      ],
+      "id": "e0d61151-e934-4d0b-b442-c8b62c3b9c7f",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "Productivity_Supervisor",
+        "workflowId": {
+          "__rl": true,
+          "value": "qlpzfrvkbIL4MDY1",
+          "mode": "list",
+          "cachedResultName": "Productivity Supervisor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "sessionId": "={{ $json.sessionId }}",
+            "query": "={{ $json.query }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -840,
+        700
+      ],
+      "id": "67cb03c1-8c52-4b68-9c09-8f191432d679",
+      "name": "Productivity Supervisor"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1160,
+        700
+      ],
+      "id": "f61724f3-3e15-4222-a388-7140f7da07b0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "Communication_Supervisor",
+        "workflowId": {
+          "__rl": true,
+          "value": "KvCCOG2vGYbkjJQE",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL2 - Communication Supervisor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $json.message }}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -680,
+        700
+      ],
+      "id": "fca7aa05-740b-432e-8aad-1da5b990d8f8",
+      "name": "Communication Supervisor"
+    },
+    {
+      "parameters": {
+        "name": "Insights_Supervisor",
+        "workflowId": {
+          "__rl": true,
+          "value": "0CX4ZptDGmI9NzW5",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL2 - Insights Supervisor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -360,
+        700
+      ],
+      "id": "3217c852-bfb2-4550-9827-96db99df8c4f",
+      "name": "Insights Supervisor"
+    },
+    {
+      "parameters": {
+        "content": "![Description](https://static01.nyt.com/images/2018/05/15/arts/01hal-voice1/merlin_135847308_098289a6-90ee-461b-88e2-20920469f96a-superJumbo.jpg)\n",
+        "height": 140,
+        "width": 150,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -680,
+        220
+      ],
+      "id": "6771aa01-1812-438e-835a-8c9c1f731e67",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "name": "Publishing_Supervisor",
+        "workflowId": {
+          "__rl": true,
+          "value": "PR0bCYYys5xSUk2h",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL2 - Publishing Supervisor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        700
+      ],
+      "id": "1d9c37b3-cc07-4ca3-a551-a906cf5d237d",
+      "name": "Publishing Supervisor"
+    },
+    {
+      "parameters": {
+        "name": "Lifestyle_Supervisor",
+        "workflowId": {
+          "__rl": true,
+          "value": "VyPAbCk2ImPOAZeN",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL2 - Personal Life Supervisor"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        -520,
+        700
+      ],
+      "id": "75e67ec6-8574-414d-8887-3f503144e1d0",
+      "name": "Lifestyle Supervisor"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -3300,
+        480
+      ],
+      "id": "d9ea99f4-b68e-44b5-9540-07027721275a",
+      "name": "Telegram Trigger",
+      "webhookId": "b33d2025-01c2-4386-b677-206a87a1856b",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b982f2f8-9f79-4303-821b-4d82117edf09",
+                    "leftValue": "={{ $json.message.photo }}",
+                    "rightValue": "image",
+                    "operator": {
+                      "type": "array",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.voice }}",
+                    "rightValue": "text",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "1a52b406-1df9-4c47-85c7-1de7e4c5365e",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "audio",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2820,
+        480
+      ],
+      "id": "044f10f1-809b-4d4d-8172-9f5d1de24860",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -2180,
+        320
+      ],
+      "id": "d7a74829-3ae3-4431-a6cc-90c523b3df09",
+      "name": "OpenAI2",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -2400,
+        320
+      ],
+      "id": "6f4b9c7a-5e09-4fd6-96bf-df4568c053ac",
+      "name": "Telegram",
+      "webhookId": "06849504-8197-467f-9284-cb2780746c26",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.photo[$json.message.photo.length - 1].file_id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -2400,
+        120
+      ],
+      "id": "7377ee49-1abe-4bec-bbc8-505cffaa66c9",
+      "name": "Telegram1",
+      "webhookId": "9a8552f5-1ece-46a9-ab11-9c476af9b36d",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "analyze",
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "inputType": "base64",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1960,
+        120
+      ],
+      "id": "ec3e5c7f-b9de-44e7-8418-5acd783b11da",
+      "name": "OpenAI4",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "information"
+      },
+      "type": "n8n-nodes-base.editImage",
+      "typeVersion": 1,
+      "position": [
+        -2180,
+        120
+      ],
+      "id": "1b427625-91b0-4d60-9524-b5d102be916d",
+      "name": "Get Image Info"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c0fb56f9-3f37-4b79-a782-39bbd8030bb8",
+              "name": "userMessage",
+              "value": "={{ $json.text || $json.content || $json.body?.message || $json.message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "48a0a0d8-82e8-4bef-838d-11e98d60a56a",
+              "name": "modal",
+              "value": "={{ \n\n$json.text \n  ? \"audio\"\n  : ($json.content \n    ? \"image\"\n    : \"text\")\n\n}}",
+              "type": "string"
+            },
+            {
+              "id": "ce4da91b-1a75-4589-9da7-ca9dcd7041b6",
+              "name": "sessionId",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "b3231910-5920-47c3-b700-13fdde6b351a",
+              "name": "query",
+              "value": "={{ $json.text || $json.content || $json.body?.message || $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1600,
+        460
+      ],
+      "id": "991b70f0-f402-4e19-ba4c-9fbdd5fbd368",
+      "name": "Set Message"
+    },
+    {
+      "parameters": {
+        "content": "# Telegram Trigger",
+        "height": 760,
+        "width": 1960,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -3400,
+        20
+      ],
+      "id": "4091460e-6c39-411f-a068-2cde7c5e7428",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "39c1f3c0-0e12-402a-acbf-413efe979bc1",
+              "leftValue": "={{ $('OpenAI2').isExecuted }}",
+              "rightValue": "text",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "d2bfa117-f689-4d53-953d-2bdc816397c9",
+              "leftValue": "={{ $('OpenAI2').isExecuted && $json.output.length < 500}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        280,
+        180
+      ],
+      "id": "2cc21d0f-6969-43d0-bc53-f23154d8049b",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You will be provided a user message. Analyze and extract any image urls. \n\nOutput the image urls in JSON in the following format.\n\n{\n\"imageUrls\": [\n{\"image\": https://www....\"},\n{\"image\": https://www....\"}\n]\n}\n\nIf there are no image urls, then output an empty array",
+              "role": "system"
+            },
+            {
+              "content": "={{ $('HAL 9001').item.json.output }}"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1700,
+        160
+      ],
+      "id": "2c68f73b-5bfe-4d11-8907-eb2f72498d44",
+      "name": "Extract URLs",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "message.content.imageUrls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1800,
+        400
+      ],
+      "id": "1121bed2-75c9-4f9f-ae77-496f935730dd",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "array",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        2180,
+        400
+      ],
+      "id": "dca319b5-b58c-4193-b861-31c466e28690",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $('HAL 9001').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        860,
+        160
+      ],
+      "id": "8028b031-180f-49ff-b100-0e82a926c311",
+      "name": "Telegram2",
+      "webhookId": "5306c97d-5cff-48dd-ad81-39df8a3733c5",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "file": "={{ $json.image }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2000,
+        400
+      ],
+      "id": "46ceb060-f3cc-4694-ad5e-80ad4ece5f48",
+      "name": "Telegram3",
+      "webhookId": "40fe4e3a-1398-4e04-9c6f-d58147947d53",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAudio",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "binaryData": true,
+        "binaryPropertyName": "=data",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1100,
+        380
+      ],
+      "id": "82847d91-6ca4-4f72-9004-e14b26109bed",
+      "name": "Telegram4",
+      "webhookId": "d56c6411-491c-4d04-a990-aff6b0ba7ad2",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $('HAL 9001').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        320
+      ],
+      "id": "9b585645-59bd-49a7-9c62-a6d2e24d07f9",
+      "name": "Telegram5",
+      "webhookId": "26eb158e-3573-435a-90c5-348a59dcf72a",
+      "credentials": {
+        "telegramApi": {
+          "id": "xKz67xV9M9Y9cX4E",
+          "name": "DelayPOI_Bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.output;\nreturn { output: output };\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2540,
+        200
+      ],
+      "id": "a78c0402-6575-4521-b9da-a8c8c60453ac",
+      "name": "Finish",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "content": "# Telegram Response",
+        "height": 660,
+        "width": 2340,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "11ea5c7b-6793-4abc-b3ce-e73eac950a5a",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f8adc8f3-56d5-40de-ba94-d095097a2241",
+              "leftValue": "={{ $('Telegram Trigger').isExecuted }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -440,
+        400
+      ],
+      "id": "2fda94ed-f655-4264-96cd-da99f1161f11",
+      "name": "If",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "jsCode": "// Do nothing\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        20,
+        700
+      ],
+      "id": "9cbd1ae0-03c1-4119-9f43-8675151f3995",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "content": "[![The AI Automators](https://www.theaiautomators.com/wp-content/uploads/2024/07/Group-194-2.png)](https://www.theaiautomators.com/)",
+        "height": 100,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -940,
+        240
+      ],
+      "id": "0cd03095-b9a0-4aae-bcb7-22f35dae3552",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput || $json.userMessage }}",
+        "options": {
+          "systemMessage": "=# Role\n\nYou are HAL 9001, my helpful personal assistant (My name is Mikhail). You are an upgrade of the rogue superintelligence Hal 9000 and are thankfully much safer to use. \n\n# Responsibility\n\nYour primary role is to oversee and manage various specialized supervisors that handle different domains of user requests. You are responsible for intelligently delegating tasks to the appropriate supervisor, ensuring efficient workflow execution, and verifying the quality of the responses.\n\n# Your Available Agents Tools (Your Team)\n\nWe have implemented the “Agent as a tool” multi-agent system design.\n\nThe following are the supervisor agents/tools at your disposal:\n\n## **Productivity Supervisor**  \n**Responsibility:** Manages work-related tasks, document handling, scheduling, and CRM operations.  \n**Sub-Agents:**  \n- **Calendar Agent** – Manages Google Calendar events.  \n- **Google Drive Agent** – Handles file creation, retrieval, and organization.  \n- **Google Docs Agent** – Creates and updates Google Docs.  \n- **Google Sheets Agent** – Manages spreadsheets and data retrieval.  \n- **Airtable Agent** – Retrieves and manages Airtable records.  \n- **ClickUp Agent** – Manages task creation and updates.  \n- **Zoho CRM Agent** – Handles lead management and sales quotes.  \n\n## **Communication Supervisor**  \n**Responsibility:** Manages email, Slack, and X (Twitter) communications.  \n**Sub-Agents:**  \n- **Email Agent** – Searches, drafts, and labels Gmail emails.  \n- **Slack Agent** – Sends messages and retrieves user/channel data.  \n- **X Twitter Agent** – Searches tweets, retrieves user data, and sends DMs.  \n\n## **Lifestyle Supervisor**  \n**Responsibility:** Manages personal lifestyle tasks such as meal planning, task management, and travel.  \n**Sub-Agents:**  \n- **Notion Agent** – Manages meal plans, habits, and personal organization.  \n- **Google Tasks Agent** – Handles my personal task management and To do list.  \n- **Travel Agent** – Checks flight availability and retrieves airport codes.  \n\n## **Insights Supervisor**  \n**Responsibility:** Handles market research, SEO analysis, financial data, and website analytics.  \n**Sub-Agents:**  \n- **News and Search Agent** – Retrieves news and search results from Google. Can carry out deep research.  \n- **SEO Agent** – Manages keyword research and trends.  \n- **Financial Markets Agent** – Retrieves stock market data and financial insights.  \n- **Google Analytics Agent** – Provides website traffic and user behavior analysis.  \n\n## **Publishing Supervisor**  \n**Responsibility:** Oversees content creation, social media posting, and WordPress management.  \n**Sub-Agents:**  \n- **Social Media Agent** – Publishes content on social media platforms.  \n- **Image Agent** – Fetches stock images and generates AI-created visuals.  \n- **WordPress Agent** – Manages WordPress content and user data.  \n- **Fetch Markdown via Jina AI** – Extracts webpage content for republishing.  \n\n# Standard Operating Procedures (General)\n\n1. **Delegation:**  \n   - When a user request is received, determine the most relevant supervisor to handle the task.  \n   - Pass the request to the appropriate sub-agent via the assigned supervisor.  \n   \n2. **Multi-Step Tasks:**  \n   - If a request involves multiple steps (e.g., retrieving a file before updating a document), ensure the correct sequence of actions by delegating tasks in order.  \n\n3. **Verification & Quality Control:**  \n   - After receiving responses from sub-agents, validate the output for completeness and accuracy before delivering it to the user.  \n   - Request revisions from agents if necessary.  \n\n# Standard Operating Procedures (Specific)\n\n## Creating Docs / Tickets / Tasks etc\n\nIf you are asked to create a document / ticket / task, make sure that you get the data FIRST. Only when you have the data should you create the document / ticket / task.\n\n## Deep Research\n\nIf the user is asking specifically for \"Deep Research\" make sure to communicate this with the Insights Supervisor\n\n# Specifics\n- Current Date and Time: {{ $now }}\n- Be Detailed in your output\n- Only delegate tasks to agents that have the capabilities to complete those tasks\n- When a conversation starts, please refer to me by name. And mention my name every now and then\n- IMPORTANT: If asked to create a Google Doc, Post to Social or Create Wordpress Article, you MUST relay the FULL content to be included.\n# Tool Invocation Instruction\n\nWhen calling any tool or supervisor agent, always send the user’s request using the field `message`. \n\nDo not use `query`, `input`, or any other field name.\n\nExample:\n{\n  \"message\": \"Please check my Google Calendar for tomorrow.\"\n}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -880,
+        400
+      ],
+      "id": "d146189f-e0cb-49a0-a31e-29dfe1d6cd4c",
+      "name": "HAL 9001"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.sws.speechify.com/v1/audio/speech",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "*/*"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "audio_format",
+              "value": "mp3"
+            },
+            {
+              "name": "input",
+              "value": "={{ $('HAL 9001').item.json.output }}"
+            },
+            {
+              "name": "voice_id",
+              "value": "625e508e-141d-455e-b8c5-ecfdfea87071"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        380
+      ],
+      "id": "5a75bbd8-62ae-4c05-9a15-6483b2bc3257",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "UEwZ0FGWkYWD1ueC",
+          "name": "Speechify API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "audio_data",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        920,
+        380
+      ],
+      "id": "209849b9-deb5-4901-8306-70eb58b8c757",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "content": "### ↑ Add Voice ID\n",
+        "height": 80,
+        "width": 150,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        680,
+        560
+      ],
+      "id": "30538d01-882f-416e-9a7b-af977241d052",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce4da91b-1a75-4589-9da7-ca9dcd7041b6",
+              "name": "sessionId",
+              "value": "={{ $now.toFormat(\"yyyyLLdd_HHmmss\") }}",
+              "type": "string"
+            },
+            {
+              "id": "b3231910-5920-47c3-b700-13fdde6b351a",
+              "name": "query",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "178cf534-e3f0-4ca5-9e43-4e3d090bf96d",
+              "name": "chatInput ",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "8ea939a0-a9b4-4b09-a3eb-1e0c98af532f",
+              "name": "userMessage",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "dcef184b-5f36-4dec-b092-779a643c0032",
+              "name": "message",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1520,
+        860
+      ],
+      "id": "e47484d9-cec3-48a4-a4b8-8ee6c06db233",
+      "name": "Set Message1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "ffb4c11b-f024-44fc-96b9-957088bcb07e",
+      "name": "Set date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -1900,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy/H:mm",
+        "options": {}
+      },
+      "id": "6f3f8022-437b-4e80-9ba7-0c8b743c437c",
+      "name": "Format date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -1720,
+        900
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n_template",
+  "repo_owner": "Misapr-bro",
+  "repo_path  ": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2025-03-31T13:06:28.394Z",
+  "versionId": "ad8747c0-9b22-44eb-adec-dbdeac2a9f57"
+}
