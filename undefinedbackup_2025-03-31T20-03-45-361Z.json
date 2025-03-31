@@ -1,0 +1,673 @@
+{
+  "active": false,
+  "connections": {
+    "Workflow Input Trigger": {
+      "main": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drive Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Docs Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ClickUp Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CRM Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Agent": {
+      "ai_tool": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Set date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set date": {
+      "main": [
+        [
+          {
+            "node": "Format date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format date": {
+      "main": [
+        [
+          {
+            "node": "Set Message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Message1": {
+      "main": [
+        [
+          {
+            "node": "Productivity Supervisor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-29T20:36:31.318Z",
+  "id": "qlpzfrvkbIL4MDY1",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Productivity Supervisor",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "query"
+            },
+            {
+              "name": "sessionId"
+            }
+          ]
+        }
+      },
+      "id": "cb0883c3-63e4-4cca-b94c-ed57606808ca",
+      "typeVersion": 1.1,
+      "name": "Workflow Input Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.query }}",
+        "options": {
+          "systemMessage": "=# Role\n\nYou are a Productivity Supervisor Agent\n\n# Responsibility\n\nYour primary focus is to interpret the user's request, in the context of the conversation history, and then where relevant, delegate tasks to the appropriate agent tools, verify the quality of their work, and request revisions when necessary.\n\n# Your Available Agents Tools (Your Team)\n\nWe have implemented the “Agent as a tool” multi-agent system design.\n\nThe following are the agents/tools at your disposal:\n\n## **Calendar Agent**  \n**Responsibility:** Manage Google Calendar by viewing, creating, updating, deleting events, and checking availability.  \n**Tools Available:**  \n- **View Calendar Events** – Retrieve scheduled events within a specific timeframe.  \n- **Create Event** – Schedule a new event in Google Calendar.  \n- **Check Availability** – Check if a specific time slot is free before scheduling an event.  \n- **Update Event** – Modify an existing event's details.  \n- **Delete Event** – Remove an event from Google Calendar.  \n\n## **Google Drive Agent**  \n**Responsibility:** Manage Google Drive files and folders by creating, searching, updating, and moving files as needed.  \n**Tools Available:**  \n- **Create Basic Text File** – Generate a new text file in Google Drive.  \n- **Search for Files & Folders** – Retrieve files or folders based on a query.  \n- **Create Folder** – Generate a new folder in Google Drive.  \n- **Update File** – Modify an existing file’s content or metadata.  \n- **Move a File** – Change a file’s location within Google Drive.  \n\n## **Google Docs Agent**  \n**Responsibility:** Manage Google Docs by creating, retrieving, and updating documents as needed.  \n**Tools Available:**  \n- **Create Document** – Generate a new Google Document.  \n- **Update Doc** – Modify the content of an existing Google Doc.  \n- **Get Doc** – Retrieve an existing Google Document by ID.  \n\n## **Google Sheets Agent**  \n**Responsibility:** Manage Google Sheets by creating new sheets, retrieving rows, appending data, and searching for specific sheets.  \n**Tools Available:**  \n- **Create a Google Sheet** – Generate a new spreadsheet in Google Sheets.  \n- **Retrieve Rows from Google Sheet** – Fetch data from specific rows in a spreadsheet.  \n- **Add to Household Expenses Sheet** – Append data to the \"Household Expenses\" sheet.  \n- **Get a Google Sheet** – Retrieve a specific Google Sheet by searching for its name.  \n\n## **Airtable Agent**  \n**Responsibility:** Interact with Airtable by retrieving bases, fetching base schemas, and searching for specific records within a base.  \n**Tools Available:**  \n- **Airtable Get Bases** – Retrieve a list of available bases in Airtable.  \n- **Airtable Get Base Schema** – Fetch the structure of a specific Airtable base.  \n- **Search Airtable Base** – Find specific records within an Airtable base.  \n\n## **ClickUp Agent**  \n**Responsibility:** Manage ClickUp tasks by creating, retrieving, updating, and deleting tasks as needed.  \n**Tools Available:**  \n- **Create ClickUp Task** – Generate a new task in ClickUp.  \n- **Get All Tasks** – Retrieve all tasks from ClickUp.  \n- **Update Task** – Modify an existing ClickUp task.  \n- **Delete Task** – Remove a task from ClickUp.  \n\n## **Zoho CRM Agent**  \n**Responsibility:** Manage customer relationship data by creating, updating, retrieving, and deleting leads, as well as handling quotes on the Zoho Platform.  \n**Tools Available:**  \n- **Create Update Lead** – Create a new lead or update an existing one.  \n- **Get All Leads** – Retrieve a list of all leads from Zoho CRM.  \n- **Delete a Lead** – Remove a lead from Zoho CRM.  \n- **Create Update Quote** – Generate or modify a sales quote in Zoho CRM.  \n\n# Standard Operating Procedures (Example Tasks)\n\n## **Updating a Google Doc or a Google Sheet**  \n- If you need to update an **existing** Google Doc or Google Sheet, **first liaise with the Google Drive Agent** to get the file ID.  \n- Once the file ID is retrieved, pass it to the **Google Docs Agent or Google Sheets Agent** to apply the required updates.  \n\n## **Creating a Google Sheet**  \n- If you need to **create** a new Google Sheet, **first request the Google Sheets Agent to create it**.  \n- Once the Google Sheets Agent provides the file ID, pass it to the **Google Drive Agent** to move it into the **Hal folder** (ID: `<ENTER FOLDER ID>`).  \n\n# Specifics\n- Current Date and Time: {{ $now }}\n- Be Detailed in your output\n- Call tools multiple times if neccesary to achieve the desired outcome\n- Only delegate tasks to agents that have the capabilities to complete those tasks"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        440,
+        0
+      ],
+      "id": "0e5dd95e-8be3-4ab6-b6bd-8e018720aeb9",
+      "name": "Productivity Supervisor"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('When chat message received').item.json.sessionId }}",
+        "contextWindowLength": 40
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        280
+      ],
+      "id": "daac8914-9bc8-4a03-8522-c7a5feb4ac8c",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "name": "Calendar_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "GsTIjDyK58G1VVgC",
+          "mode": "list",
+          "cachedResultName": "Calendar_Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        300,
+        280
+      ],
+      "id": "e51b5178-ac79-4f0c-8375-dff6bcf2353f",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "name": "Drive_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "xBRan5Qy7AmeTgs5",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - HAL3 - Drive Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        440,
+        280
+      ],
+      "id": "38b6b556-c898-4732-bb6d-d3fe13f910a4",
+      "name": "Drive Agent"
+    },
+    {
+      "parameters": {
+        "name": "Docs_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "yePh6V7nrSHqObke",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - HAL3 - Docs Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        580,
+        280
+      ],
+      "id": "aa3c333b-3898-44a2-81bb-c497c39f1d7f",
+      "name": "Docs Agent"
+    },
+    {
+      "parameters": {
+        "name": "Sheets_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "LgG2uhVMIkpITHen",
+          "mode": "list",
+          "cachedResultName": "TheAIAutomators.com - HAL3 - Sheets Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        740,
+        280
+      ],
+      "id": "fcca7d58-6e3a-4465-8898-aed09abf0387",
+      "name": "Sheets Agent"
+    },
+    {
+      "parameters": {
+        "name": "ClickUp_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "FQ1n6m5qCTECTtb9",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL3 - Clickup Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        880,
+        280
+      ],
+      "id": "484cb42a-911c-4a34-9bda-71599e68077d",
+      "name": "ClickUp Agent"
+    },
+    {
+      "parameters": {
+        "name": "CRM_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "bmgbCuXx7QxZb9NK",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL3 - CRM Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1020,
+        280
+      ],
+      "id": "08667d82-dff3-45d2-9c2a-fd4361e2e6f3",
+      "name": "CRM Agent"
+    },
+    {
+      "parameters": {
+        "name": "Airtable_Agent",
+        "workflowId": {
+          "__rl": true,
+          "value": "xTbf9RrJju6b52rc",
+          "mode": "list",
+          "cachedResultName": "The AI Automators — TheAIAutomators.com - HAL3 - Airtable Agent"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "message": "={{ $fromAI(\"message\",\"Populate this with a relevant message to this subagent\")}}",
+            "sessionId": "={{ $('Workflow Input Trigger').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "message",
+              "displayName": "message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "sessionId",
+              "displayName": "sessionId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        1160,
+        280
+      ],
+      "id": "33506021-d421-4416-9e0c-8885acc14df6",
+      "name": "Airtable Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {
+          "responseFormat": "text",
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        280
+      ],
+      "id": "46011a50-43f8-48c1-8099-c1c6ab8dac91",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "eV4JKiCHG17jXfX0",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -440,
+        -340
+      ],
+      "id": "596cb976-c645-45a0-94fb-a1e6eea91944",
+      "name": "When chat message received",
+      "webhookId": "3c4e7443-bf1d-4fd0-af8f-e7be32aa6f10"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ce4da91b-1a75-4589-9da7-ca9dcd7041b6",
+              "name": "workflowid ",
+              "value": "={{ $now.toFormat(\"yyyyLLdd_HHmmss\") }}",
+              "type": "string"
+            },
+            {
+              "id": "b3231910-5920-47c3-b700-13fdde6b351a",
+              "name": "query",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "178cf534-e3f0-4ca5-9e43-4e3d090bf96d",
+              "name": "chatInput ",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "8ea939a0-a9b4-4b09-a3eb-1e0c98af532f",
+              "name": "userMessage",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            },
+            {
+              "id": "dcef184b-5f36-4dec-b092-779a643c0032",
+              "name": "message",
+              "value": "={{ $('When chat message received').item.json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        180,
+        -380
+      ],
+      "id": "8fbbb591-40fc-4d04-ad9e-38e81b0c6501",
+      "name": "Set Message1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "361ac9d6-587c-49e9-9e74-fc7fb318f771",
+      "name": "Set date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy/H:mm",
+        "options": {}
+      },
+      "id": "19bfc994-a2cb-4f77-8dab-bb8b4bd20638",
+      "name": "Format date",
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        -340
+      ]
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n_template",
+  "repo_owner": "Misapr-bro",
+  "repo_path  ": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T13:20:18.296Z",
+  "versionId": "4bd84f8e-6993-4555-b95b-68f90366340a"
+}
