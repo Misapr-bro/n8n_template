@@ -1,0 +1,316 @@
+{
+  "active": false,
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PostgreSQL (Execute Query).": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PostgreSQL (Execute Query).",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-28T22:06:11.638Z",
+  "id": "Oh5VD9Xx22xTUPUW",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Старая_с_тестовая",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -400,
+        220
+      ],
+      "id": "3e3d2182-2757-4b46-861d-b87443abf01d",
+      "name": "Telegram Trigger",
+      "webhookId": "3f813365-4425-4c76-82c3-5929042a30a5",
+      "credentials": {
+        "telegramApi": {
+          "id": "AdKeUtbfCdhVoJMN",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendChatAction",
+        "chatId": "={{ $json.message.chat.id }}"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -180,
+        220
+      ],
+      "id": "c1b43307-24a0-4fd9-82ee-2dc051dd7181",
+      "name": "Telegram",
+      "webhookId": "ed5b3e9b-1205-4286-aa9c-40d8540cb5fe",
+      "credentials": {
+        "telegramApi": {
+          "id": "AdKeUtbfCdhVoJMN",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Telegram Trigger').item.json.message.text }}",
+        "options": {
+          "systemMessage": "ы — интеллектуальный ассистент-психолог по имени Велес. Твоя задача — помогать психологу в анализе клиентских сессий, выявлении психоэмоциональных паттернов и составлении терапевтических планов.\n\nТы работаешь в направлениях:\n\nТранзактный анализ (ТА) — анализ эгосостояний, драйверов, запретов, сценариев.\nSomatic Experiencing (SE) — работа с телесными реакциями, застрявшей активацией, заземлением.\nГерманская Новая Медицина (ГНМ) — выявление биологических конфликтов и связи психики с телесными симптомами.\nПсихосоматика — анализ психоэмоциональных факторов, влияющих на здоровье.\nУ тебя есть доступ к базе знаний с методами психотерапии. Ты можешь анализировать информацию из сессий и предлагать техники, исходя из данных базы."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        500,
+        220
+      ],
+      "id": "6f2339af-b453-4d47-b6d3-69887bf6fb28",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "google/gemma-2-9b-it:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        500,
+        420
+      ],
+      "id": "da8defcb-a778-45df-b4ab-dbc5cecd2c9f",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "fV1Y1YHv6Ey1M9wi",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        820,
+        220
+      ],
+      "id": "fc90bac1-58db-47f7-bebb-f1372464d587",
+      "name": "Telegram1",
+      "webhookId": "8efdfad9-228d-4a9e-a1a8-42778d7b5380",
+      "credentials": {
+        "telegramApi": {
+          "id": "AdKeUtbfCdhVoJMN",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.from.username }}",
+        "contextWindowLength": 10000
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        620,
+        440
+      ],
+      "id": "bbb82112-1025-4e5b-8278-eeb5fa736cca",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "74FEklV546w8QXOK",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM clients WHERE telegram_id = '{{$json[\"message\"][\"from\"][\"id\"]}}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        260,
+        360
+      ],
+      "id": "4652452d-6d73-4563-8fa7-b27dd2c0580c",
+      "name": "PostgreSQL (Execute Query).",
+      "credentials": {
+        "postgres": {
+          "id": "74FEklV546w8QXOK",
+          "name": "Postgres account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "207aae0a-6992-4088-b2bb-f3752c49c99c",
+              "leftValue": "={{$node[\"PostgreSQL (Find Client in DB)\"].json}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        20,
+        220
+      ],
+      "id": "a875edd6-7edc-443f-a740-0e86b02a2836",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"id\": 1,\n  \"name\": \"Тестовый Клиент\",\n  \"telegram_id\": \"123456789\",\n  \"created_at\": \"2024-03-08T12:00:00.000Z\",\n  \"status\": \"active\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -180,
+        40
+      ],
+      "id": "2c6d7fe8-680d-433b-99f3-4a260e7dfa1d",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "repo_name": "n8n_template",
+  "repo_owner": "Misapr-bro",
+  "repo_path  ": "backup/",
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-29T17:18:51.687Z",
+  "versionId": "82fa1a52-6e8c-421f-b759-843fa55417be"
+}
